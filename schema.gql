@@ -3,14 +3,25 @@ type Query {
   post(id: ID!): Post
 }
 
-type Mutation {
-  createPost(title: String!, text: String!): Post
-  deletePost(id: ID!): Post
-  updatePost(id: ID!, title: String!, text: String!): Post
-}
-
 type Post {
   id: ID!
   title: String!
   text: String!
+  comments: [String!]!
+}
+
+type Mutation {
+  # posts area
+  createPost(title: String!, text: String!, comments: [String!]!): Post
+
+  deletePost(id: ID!): Post
+
+  updatePost(id: ID!, title: String!, text: String!): Post
+
+  # comments area
+  createComment(postId: ID!, content: String!): Post
+
+  deleteComment(postId: ID!, content: String!): Post
+
+  updateComment(postId: ID!, content: String!,newContent: String!): Post
 }
